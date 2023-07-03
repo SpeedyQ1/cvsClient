@@ -11,7 +11,7 @@ const FirstTemplate = (x) => {
   const deleteCv = async (theId) => {
     try {
       const deleteThis = await axios.patch(
-        "http://localhost:3005/users/deleteCv",
+        "https://speedyqcvs.onrender.com/users/deleteCv",
         {
           cvid: theId,
           token: token,

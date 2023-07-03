@@ -12,7 +12,7 @@ const Result = () => {
       let token = JSON.parse(localStorage.getItem("token")).token;
 
       axios
-        .post("http://localhost:3005/users/getCvs", {
+        .post("https://speedyqcvs.onrender.com/users/getCvs", {
           token: token,
         })
         .then((data) => {

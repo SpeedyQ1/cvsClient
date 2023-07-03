@@ -14,7 +14,7 @@ function Login() {
 
     try {
        const token = await axios.post(
-        "http://localhost:3005/users",
+        "https://speedyqcvs.onrender.com/users",
         {email: email, password: password}
       );
       localStorage.setItem('token', JSON.stringify(token.data));

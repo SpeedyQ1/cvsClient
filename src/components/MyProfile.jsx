@@ -25,7 +25,7 @@ function MyProfile() {
     const fetchCvs = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3005/users/getCvs",
+          "https://speedyqcvs.onrender.com/users/getCvs",
           {
             token: token,
           }

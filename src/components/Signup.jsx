@@ -10,7 +10,7 @@ function Signup() {
 
     try {
       const newUser = await axios.post(
-        "http://localhost:3005/users/register",
+        "https://speedyqcvs.onrender.com/users/register",
         { email: email, password: password }
         );
         navigate("/");

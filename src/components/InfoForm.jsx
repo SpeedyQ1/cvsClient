@@ -58,7 +58,7 @@ function InfoForm({ template }) {
 
     try {
       if (imageURL != "") {
-        const data = await axios.patch("http://localhost:3005/users/addCv", {
+        const data = await axios.patch("https://speedyqcvs.onrender.com/users/addCv", {
           token: token.token,
           firstName,
           lastName,
