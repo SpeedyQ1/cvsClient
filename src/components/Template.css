@@ -1,0 +1,25 @@
+#template-selection-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+#save-template{
+    width: fit-content;
+}
+
+#first-template-img{
+    height: 493px;
+}
+
+.input-label-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.success-symbol {
+    font-size: 24px; /* Adjust the size as per your preference */
+    color: green;
+  }

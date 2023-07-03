@@ -1,0 +1,77 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#nav-container {
+    background-color: #778DA9;
+    padding: 10px 20px;
+  }
+  
+  #nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #nav-div-container {
+    display: flex;
+  }
+  
+  .nav-title {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-title:hover {
+    border-color: #fff;
+    border-radius: 4px;
+  }
+  
+  #logout-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  #logoutBtn {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  #logoutBtn:hover {
+    background-color: #555;
+    border-radius: 4px;
+  }
+  
+  #outlet {
+    padding-top: 20px;
+    background-color: #E0E1DD;
+  }
+  
+
+#logout-icon{
+    cursor: pointer;
+}
+
+#nav-div-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#result-container{
+  display: flex;
+  justify-content: center;
+}
+

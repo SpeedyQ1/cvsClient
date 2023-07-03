@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Raleway:wght@300&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#top-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  position: relative;
+}
+
+#first-template-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.a4-container {
+  width: 595px;
+  height: 842px;
+  margin-bottom: 20px;
+  font-family: 'Raleway', sans-serif;
+  box-shadow: -1px 1px 10px 9px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+}
+
+#gray-section {
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #F5F5F5;
+  width: 100%;
+}
+
+#profile-img {
+  margin-right: 165px;
+  border-radius: 100%;
+  width: 130px;
+  margin-top: 30px;
+  position: absolute;
+  right: -145px;
+}
+
+#name-title-section {
+  margin-left: 40px;
+}
+
+#name-title {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+#last-name {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  color: rgb(15, 15, 15);
+  margin-left: 20px;
+}
+
+#first-name {
+  font-family: 'Raleway', sans-serif;
+  color: rgb(74, 76, 80);
+}
+
+.contact-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#bottom-section {
+  padding: 20px;
+  width: 100%;
+  height: 652px;
+  margin-top: 45px;
+  display: flex;
+  flex-direction: row;
+}
+
+#left-section {
+  width: 45%;
+  height: 587px;
+  border-right-style: solid;
+  padding: 5px;
+}
+
+.contact-info {
+  margin-left: 20px;
+}
+
+.contact-info-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-cubes-section {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  margin-top: 20px;
+  border-top-style: solid;
+}
+
+ul {
+  padding-left: 15px;
+  margin-top: 15px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+#right-section {
+  width: 55%;
+  height: 587px;
+  padding-left: 20px;
+}
+
+.cube-title {
+  margin-bottom: 20px;
+}
+
+.remove-defult {
+  all: unset;
+  cursor: pointer;
+}
+
+.tool-bar {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  padding: 3px;
+  margin-bottom: 10px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.scale-up:hover {
+  transform: scale(1.45);
+}
