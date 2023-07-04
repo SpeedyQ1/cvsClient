@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Upload from "./Upload";
 
 function Edit() {
+  const textareaRefs = useRef([]);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
   const navigate = useNavigate();
   const [experienceArr, setExperienceArr] = useState([""]);
@@ -30,6 +31,16 @@ function Edit() {
       });
   }, []);
 
+  useEffect(() => {
+    textareaRefs.current = textareaRefs.current.slice(0, skillsArray.length);
+  }, [skillsArray]);
+
+  const handleTextareaResize = useCallback((index) => {
+    const textarea = textareaRefs.current[index];
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }, []);
+
   function deleteModel(theIndex) {
     setSkillsArray((prev) => prev.filter((item, index) => index !== theIndex));
   }
@@ -46,6 +57,7 @@ function Edit() {
     const newArr = [...skillsArray];
     newArr[skillIndex] = e.target.value;
     setSkillsArray(newArr);
+    handleTextareaResize(skillIndex);
   }
 
   function addExperience() {
@@ -56,6 +68,7 @@ function Edit() {
     const newArr = [...experienceArr];
     newArr[expIndex] = e.target.value;
     setExperienceArr(newArr);
+    handleTextareaResize(expIndex);
   }
 
   const handleSubmitForm = async (e) => {
@@ -164,10 +177,12 @@ function Edit() {
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
+                  ref={(el) => (textareaRefs.current[index] = el)}
                   className="added-input-field"
                   placeholder={`skill ${index + 1}`}
                   value={item}
                   onChange={(e) => editSkill(index, e)}
+                  onInput={() => handleTextareaResize(index)}
                 />
                 {index > 0 && (
                   <button
@@ -188,10 +203,12 @@ function Edit() {
             {experienceArr.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
+                  ref={(el) => (textareaRefs.current[index] = el)}
                   className="added-input-field"
                   placeholder={`experience ${index + 1}`}
                   value={item}
                   onChange={(e) => editExperience(index, e)}
+                  onInput={() => handleTextareaResize(index)}
                 />
                 {index > 0 && (
                   <button
