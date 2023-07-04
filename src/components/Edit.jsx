@@ -139,14 +139,12 @@ function Edit() {
               defaultValue={cvToEdit.jobTitle}
             />
             <textarea
-              scrollHeight
-              className="textarea-field"
+              className="input-field textarea-field"
               placeholder="summary"
               defaultValue={cvToEdit.summary}
             />
             <textarea
-              scrollHeight
-              className="textarea-field"
+              className="input-field textarea-field"
               placeholder="education"
               defaultValue={cvToEdit.summary}
             />
@@ -165,9 +163,8 @@ function Edit() {
             <h1>skills:</h1>
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
-                <textarea
-                  scrollHeight
-                  className="textarea-field"
+                <input
+                  className="added-input-field"
                   type="text"
                   placeholder={`skill ${index + 1}`}
                   value={item}
@@ -192,7 +189,6 @@ function Edit() {
             {experienceArr.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
-                  scrollHeight
                   className="added-input-field"
                   placeholder={`experience ${index + 1}`}
                   value={item}

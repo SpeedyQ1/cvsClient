@@ -58,26 +58,23 @@ function InfoForm({ template }) {
 
     try {
       if (imageURL != "") {
-        const data = await axios.patch(
-          "https://speedyqcvs.onrender.com/users/addCv",
-          {
-            token: token.token,
-            firstName,
-            lastName,
-            img: imageURL,
-            phone,
-            address,
-            jobTitle,
-            theEmail,
-            summary,
-            skills: skillsArray,
-            experience: experienceArr,
-            education,
-            languages,
-            hobbies,
-            template: template,
-          }
-        );
+        const data = await axios.patch("https://speedyqcvs.onrender.com/users/addCv", {
+          token: token.token,
+          firstName,
+          lastName,
+          img: imageURL,
+          phone,
+          address,
+          jobTitle,
+          theEmail,
+          summary,
+          skills: skillsArray,
+          experience: experienceArr,
+          education,
+          languages,
+          hobbies,
+          template: template,
+        });
         navigate("/result");
         e.target.reset();
       } else {
@@ -119,13 +116,12 @@ function InfoForm({ template }) {
               placeholder="job title"
             />
             <textarea
-              scrollHeight
-              className="textarea-field"
+              className="input-field textarea-field"
               placeholder="summary"
+              
             />
             <textarea
-              scrollHeight
-              className="textarea-field"
+              className="input-field textarea-field"
               placeholder="education"
             />
             <input
@@ -138,7 +134,6 @@ function InfoForm({ template }) {
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
-                  scrollHeight
                   className="added-input-field textarea-field"
                   placeholder={`skill ${index + 1}`}
                   value={item}
@@ -163,7 +158,6 @@ function InfoForm({ template }) {
             {experienceArr.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
-                  scrollHeight
                   className="added-input-field textarea-field"
                   placeholder={`experience ${index + 1}`}
                   value={item}
@@ -183,7 +177,7 @@ function InfoForm({ template }) {
             <button className="add-btn" type="button" onClick={addExperience}>
               add another experience
             </button>
-
+            
             {<Upload setImageURL={setImageURL} />}
             <img className="uploaded-image" src={imageURL} alt="" />
             <button type="submit">Save Info</button>
