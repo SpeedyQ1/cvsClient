@@ -1,11 +1,31 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "./Cv.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Upload from "./Upload";
 
+function useDynamicTextArea(initialValue) {
+  const [value, setValue] = useState(initialValue);
+  const [height, setHeight] = useState('auto');
+
+  const ref = useCallback((node) => {
+    if (node !== null) {
+      setHeight(`${node.scrollHeight}px`);
+    }
+  }, []);
+
+  const handleChange = useCallback(
+    (event) => {
+      setValue(event.target.value);
+      setHeight(`${event.target.scrollHeight}px`);
+    },
+    []
+  );
+
+  return [value, height, ref, handleChange];
+}
+
 function Edit() {
-  const textareaRefs = useRef([]);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
   const navigate = useNavigate();
   const [experienceArr, setExperienceArr] = useState([""]);
@@ -31,16 +51,6 @@ function Edit() {
       });
   }, []);
 
-  useEffect(() => {
-    textareaRefs.current = textareaRefs.current.slice(0, skillsArray.length);
-  }, [skillsArray]);
-
-  const handleTextareaResize = useCallback((index) => {
-    const textarea = textareaRefs.current[index];
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
-  }, []);
-
   function deleteModel(theIndex) {
     setSkillsArray((prev) => prev.filter((item, index) => index !== theIndex));
   }
@@ -57,7 +67,6 @@ function Edit() {
     const newArr = [...skillsArray];
     newArr[skillIndex] = e.target.value;
     setSkillsArray(newArr);
-    handleTextareaResize(skillIndex);
   }
 
   function addExperience() {
@@ -68,7 +77,6 @@ function Edit() {
     const newArr = [...experienceArr];
     newArr[expIndex] = e.target.value;
     setExperienceArr(newArr);
-    handleTextareaResize(expIndex);
   }
 
   const handleSubmitForm = async (e) => {
@@ -94,141 +102,208 @@ function Edit() {
         phone,
         address,
         jobTitle,
-        theEmail,
         summary,
         skills: skillsArray,
         experience: experienceArr,
         education,
         languages,
         hobbies,
-        template: cvToEdit.template,
-        cvIdToChange: id,
+        theEmail,
+        id: id,
       });
-      navigate("/myprofile");
-    } catch (err) {
-      console.log(err);
+
+      console.log(data);
+      navigate("/user");
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  const handleImageUpload = (url) => {
+    setImageURL(url);
+  };
+
+  const experienceFields = experienceArr.map((item, index) => {
+    const [value, height, ref, handleChange] = useDynamicTextArea(item);
+    return (
+      <div className="add-input" key={index}>
+        <textarea
+          className="added-input-field"
+          placeholder={`experience ${index + 1}`}
+          value={value}
+          style={{ height }}
+          onChange={handleChange}
+          ref={ref}
+        />
+        {index > 0 && (
+          <button
+            className="X-btn"
+            type="button"
+            onClick={() => deleteMe(index)}
+          >
+            x
+          </button>
+        )}
+      </div>
+    );
+  });
+
+  const skillsFields = skillsArray.map((item, index) => {
+    const [value, height, ref, handleChange] = useDynamicTextArea(item);
+    return (
+      <div className="add-input" key={index}>
+        <textarea
+          className="added-input-field"
+          placeholder={`skill ${index + 1}`}
+          value={value}
+          style={{ height }}
+          onChange={handleChange}
+          ref={ref}
+        />
+        {index > 0 && (
+          <button
+            className="X-btn"
+            type="button"
+            onClick={() => deleteModel(index)}
+          >
+            x
+          </button>
+        )}
+      </div>
+    );
+  });
+
   return (
     <div>
-      <div>
-        <form id="info-form" onSubmit={handleSubmitForm}>
-          <div id="form-container">
-            <input
-              className="input-field"
-              type="text"
-              placeholder="first name"
-              defaultValue={cvToEdit.firstName}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="last name"
-              defaultValue={cvToEdit.lastName}
-            />
-            <input
-              className="input-field"
-              type="email"
-              placeholder="email"
-              defaultValue={cvToEdit.theEmail}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="phone"
-              defaultValue={cvToEdit.phone}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="address"
-              defaultValue={cvToEdit.address}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="job title"
-              defaultValue={cvToEdit.jobTitle}
-            />
-            <textarea
-              className="input-field textarea-field"
-              placeholder="summary"
-              defaultValue={cvToEdit.summary}
-            />
-            <textarea
-              className="input-field textarea-field"
-              placeholder="education"
-              defaultValue={cvToEdit.summary}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="languages"
-              defaultValue={cvToEdit.languages}
-            />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="hobbies"
-              defaultValue={cvToEdit.hobbies}
-            />
-            <h1>skills:</h1>
-            {skillsArray.map((item, index) => (
-              <div className="add-input" key={index}>
-                <textarea
-                  ref={(el) => (textareaRefs.current[index] = el)}
-                  className="added-input-field"
-                  placeholder={`skill ${index + 1}`}
-                  value={item}
-                  onChange={(e) => editSkill(index, e)}
-                  onInput={() => handleTextareaResize(index)}
+      <div className="edit-div">
+        <div className="row">
+          <div className="col edit-col">
+            <div className="add-button">
+              <h2>Edit</h2>
+            </div>
+            <form onSubmit={handleSubmitForm}>
+              <div>
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  defaultValue={cvToEdit.firstName}
+                  required
                 />
-                {index > 0 && (
-                  <button
-                    className="X-btn"
-                    type="button"
-                    onClick={() => deleteModel(index)}
-                  >
-                    x
-                  </button>
-                )}
               </div>
-            ))}
-            <button className="add-btn" type="button" onClick={addSkill}>
-              add another skill
-            </button>
+              <div>
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  defaultValue={cvToEdit.lastName}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={cvToEdit.theEmail}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  defaultValue={cvToEdit.phone}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="address">Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  defaultValue={cvToEdit.address}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="jobTitle">Job Title</label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  defaultValue={cvToEdit.jobTitle}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="summary">Summary</label>
+                <textarea
+                  name="summary"
+                  defaultValue={cvToEdit.summary}
+                  required
+                ></textarea>
+              </div>
 
-            <h1>Experience:</h1>
-            {experienceArr.map((item, index) => (
-              <div className="add-input" key={index}>
-                <textarea
-                  ref={(el) => (textareaRefs.current[index] = el)}
-                  className="added-input-field"
-                  placeholder={`experience ${index + 1}`}
-                  value={item}
-                  onChange={(e) => editExperience(index, e)}
-                  onInput={() => handleTextareaResize(index)}
-                />
-                {index > 0 && (
-                  <button
-                    className="X-btn"
-                    type="button"
-                    onClick={() => deleteMe(index)}
-                  >
-                    x
-                  </button>
-                )}
+              <div className="dynamic-input">
+                <h4>Skills</h4>
+                {skillsFields}
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={addSkill}
+                >
+                  Add Skill
+                </button>
               </div>
-            ))}
-            <button className="add-btn" type="button" onClick={addExperience}>
-              add another experience
-            </button>
-            {<Upload setImageURL={setImageURL} />}
-            <img className="uploaded-image" src={imageURL} alt="" />
-            <button type="submit">Save Info</button>
+
+              <div className="dynamic-input">
+                <h4>Experience</h4>
+                {experienceFields}
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={addExperience}
+                >
+                  Add Experience
+                </button>
+              </div>
+
+              <div>
+                <label htmlFor="education">Education</label>
+                <textarea
+                  name="education"
+                  defaultValue={cvToEdit.education}
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label htmlFor="languages">Languages</label>
+                <textarea
+                  name="languages"
+                  defaultValue={cvToEdit.languages}
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label htmlFor="hobbies">Hobbies</label>
+                <textarea
+                  name="hobbies"
+                  defaultValue={cvToEdit.hobbies}
+                  required
+                ></textarea>
+              </div>
+
+              <button className="save-btn" type="submit">
+                Save
+              </button>
+            </form>
           </div>
-        </form>
+          <div className="col">
+            <Upload handleImageUpload={handleImageUpload} />
+            {imageURL && <img src={imageURL} alt="Profile" />}
+          </div>
+        </div>
       </div>
     </div>
   );
