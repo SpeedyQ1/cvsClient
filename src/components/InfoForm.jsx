@@ -180,7 +180,7 @@ function InfoForm({ template }) {
             </button>
             
             {<Upload setImageURL={setImageURL} />}
-            <img src={imageURL} alt="" />
+            <img className="uploaded-image" src={imageURL} alt="" />
             <button type="submit">Save Info</button>
           </div>
         </form>
