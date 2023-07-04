@@ -159,13 +159,13 @@ function Edit() {
               defaultValue={cvToEdit.jobTitle}
             />
             <textarea
-              className="input-field textarea-field"
+              className="textarea-field"
               placeholder="summary"
               defaultValue={cvToEdit.summary}
               ref={summaryTextAreaRef}
             />
             <textarea
-              className="input-field textarea-field"
+              className="textarea-field"
               placeholder="education"
               defaultValue={cvToEdit.summary}
               ref={educationTextAreaRef}
