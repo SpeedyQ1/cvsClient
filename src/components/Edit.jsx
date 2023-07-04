@@ -73,7 +73,7 @@ function Edit() {
     const hobbies = e.target[9].value;
 
     try {
-      const data = await axios.patch("http://localhost:3005/users/editCv", {
+      const data = await axios.patch("https://speedyqcvs.onrender.com/users/editCv", {
         token: token.token,
         firstName,
         lastName,
