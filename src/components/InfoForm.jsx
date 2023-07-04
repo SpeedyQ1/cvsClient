@@ -179,7 +179,12 @@ function InfoForm({ template }) {
             </button>
             
             {<Upload setImageURL={setImageURL} />}
-            <img className="uploaded-image" src={imageURL} alt="" />
+            {imageURL != "" && 
+            <>
+            <img className="uploaded-image" src={imageURL} alt="" /> 
+            <button type="button" onClick={()=>setImageURL("")}>remove image</button>
+            </>
+            }
             <button type="submit">Save Info</button>
           </div>
         </form>
