@@ -116,11 +116,13 @@ function InfoForm({ template }) {
               placeholder="job title"
             />
             <textarea
+              cdkTextareaAutosize
               className="input-field textarea-field"
               placeholder="summary"
               
             />
             <textarea
+              cdkTextareaAutosize
               className="input-field textarea-field"
               placeholder="education"
             />
@@ -134,6 +136,7 @@ function InfoForm({ template }) {
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
+                  cdkTextareaAutosize
                   className="added-input-field textarea-field"
                   placeholder={`skill ${index + 1}`}
                   value={item}
@@ -158,6 +161,7 @@ function InfoForm({ template }) {
             {experienceArr.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
+                  cdkTextareaAutosize
                   className="added-input-field textarea-field"
                   placeholder={`experience ${index + 1}`}
                   value={item}
