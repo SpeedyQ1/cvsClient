@@ -139,14 +139,14 @@ function Edit() {
               defaultValue={cvToEdit.jobTitle}
             />
             <textarea
-              cdkTextareaAutosize
-              className="input-field textarea-field"
+              scrollHeight
+              className="textarea-field"
               placeholder="summary"
               defaultValue={cvToEdit.summary}
             />
             <textarea
-              cdkTextareaAutosize
-              className="input-field textarea-field"
+              scrollHeight
+              className="textarea-field"
               placeholder="education"
               defaultValue={cvToEdit.summary}
             />
@@ -166,8 +166,8 @@ function Edit() {
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
-                  cdkTextareaAutosize
-                  className="added-input-field textarea-field"
+                  scrollHeight
+                  className="textarea-field"
                   type="text"
                   placeholder={`skill ${index + 1}`}
                   value={item}
@@ -192,7 +192,7 @@ function Edit() {
             {experienceArr.map((item, index) => (
               <div className="add-input" key={index}>
                 <textarea
-                  cdkTextareaAutosize
+                  scrollHeight
                   className="added-input-field"
                   placeholder={`experience ${index + 1}`}
                   value={item}
