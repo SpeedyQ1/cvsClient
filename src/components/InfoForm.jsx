@@ -133,9 +133,8 @@ function InfoForm({ template }) {
             <h1 className="form-title-h">skills:</h1>
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
-                <input
-                  className="added-input-field"
-                  type="text"
+                <textarea
+                  className="added-input-field textarea-field"
                   placeholder={`skill ${index + 1}`}
                   value={item}
                   onChange={(e) => editSkill(index, e)}

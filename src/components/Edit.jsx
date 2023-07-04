@@ -163,8 +163,8 @@ function Edit() {
             <h1>skills:</h1>
             {skillsArray.map((item, index) => (
               <div className="add-input" key={index}>
-                <input
-                  className="added-input-field"
+                <textarea
+                  className="added-input-field textarea-field"
                   type="text"
                   placeholder={`skill ${index + 1}`}
                   value={item}
