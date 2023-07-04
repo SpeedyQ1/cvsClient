@@ -72,12 +72,12 @@ const FirstTemplate = (x) => {
         <button onClick={convertHtmlToPdf} className="remove-defult scale-up">
           <PictureAsPdfIcon fontSize="small" />
         </button>
-        <Link className="remove-defult scale-up" to={`/edit/${cv._id}`}>
+        <Link className="remove-defult scale-up" to={`/edit/${mainData._id}`}>
           <EditIcon fontSize="small" />
         </Link>
         <button
           className="remove-defult scale-up"
-          onClick={() => deleteCv(cv._id)}
+          onClick={() => deleteCv(mainData._id)}
         >
           <DeleteIcon fontSize="small" />
         </button>
