@@ -118,7 +118,7 @@ function InfoForm({ template }) {
             <textarea
               className="input-field textarea-field"
               placeholder="summary"
-              maxLength={300}
+              
             />
             <textarea
               className="input-field textarea-field"
