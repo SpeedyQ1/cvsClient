@@ -141,7 +141,7 @@ function Edit() {
             <textarea
               className="input-field textarea-field"
               placeholder="summary"
-              maxLength={150}
+              maxLength={300}
               defaultValue={cvToEdit.summary}
             />
             <textarea
