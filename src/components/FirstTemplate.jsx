@@ -4,6 +4,9 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const FirstTemplate = (x) => {
   let token = JSON.parse(localStorage.getItem("token")).token;
@@ -65,12 +68,20 @@ const FirstTemplate = (x) => {
   return (
     <>
       <div id="big-cv-div">
-        {" "}
-        <button onClick={convertHtmlToPdf} id="pdf-btn">
-          Conver To PDF
+      <div className="tool-bar">
+        <button onClick={convertHtmlToPdf} className="remove-defult scale-up">
+          <PictureAsPdfIcon fontSize="small" />
         </button>
-        <Link to={`/edit/${mainData._id}`}>Edit</Link>
-        <button onClick={() => deleteCv(mainData._id)}>delete</button>
+        <Link className="remove-defult scale-up" to={`/edit/${cv._id}`}>
+          <EditIcon fontSize="small" />
+        </Link>
+        <button
+          className="remove-defult scale-up"
+          onClick={() => deleteCv(cv._id)}
+        >
+          <DeleteIcon fontSize="small" />
+        </button>
+      </div>
         <div id={randomId} className="cv-container">
           <nav className="cv-navbar">
             <div className="name">{`Applicant Name: ${firstName} ${lastName}`}</div>
