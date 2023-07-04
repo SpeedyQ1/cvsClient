@@ -33,14 +33,14 @@ function Signup() {
         <form id="signup-form" onSubmit={handleSubmit}>
           <h2 id="signup-title">Sign Up</h2>
           <input
-            className="input-field"
+            className="input-field-log"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            className="input-field"
+            className="input-field-log"
             type="password"
             placeholder="Password"
             value={password}

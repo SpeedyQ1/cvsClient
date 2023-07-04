@@ -44,14 +44,14 @@ function Login() {
         <form id="login-form" onSubmit={handleSubmit}>
           <h2 id="login-title">Login</h2>
           <input
-            className="input-field"
+            className="input-field-log"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            className="input-field"
+            className="input-field-log"
             type="password"
             placeholder="Password"
             value={password}
