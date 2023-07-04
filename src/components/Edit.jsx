@@ -13,6 +13,8 @@ function Edit() {
   const [cvsArr, setCvsArr] = useState([]);
   const [cvToEdit, setCvToEdit] = useState({});
   const [imageURL, setImageURL] = useState();
+  const summaryTextAreaRef = useRef(null);
+  const educationTextAreaRef = useRef(null);
 
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("token")).token;
@@ -30,33 +32,23 @@ function Edit() {
       });
   }, []);
 
-  function deleteModel(theIndex) {
-    setSkillsArray((prev) => prev.filter((item, index) => index !== theIndex));
-  }
+  // Function to adjust the height of the text area based on the content
+  const adjustTextAreaHeight = useCallback((ref) => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = `${ref.current.scrollHeight}px`;
+    }
+  }, []);
 
-  function deleteMe(theIndex) {
-    setExperienceArr(experienceArr.filter((item, index) => index !== theIndex));
-  }
+  useEffect(() => {
+    // Adjust the height of the summary text area initially and whenever its content changes
+    adjustTextAreaHeight(summaryTextAreaRef);
+  }, [summaryTextAreaRef, adjustTextAreaHeight]);
 
-  function addSkill() {
-    setSkillsArray((prev) => [...prev, ""]);
-  }
-
-  function editSkill(skillIndex, e) {
-    const newArr = [...skillsArray];
-    newArr[skillIndex] = e.target.value;
-    setSkillsArray(newArr);
-  }
-
-  function addExperience() {
-    setExperienceArr((prev) => [...prev, ""]);
-  }
-
-  function editExperience(expIndex, e) {
-    const newArr = [...experienceArr];
-    newArr[expIndex] = e.target.value;
-    setExperienceArr(newArr);
-  }
+  useEffect(() => {
+    // Adjust the height of the education text area initially and whenever its content changes
+    adjustTextAreaHeight(educationTextAreaRef);
+  }, [educationTextAreaRef, adjustTextAreaHeight]);
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -96,6 +88,34 @@ function Edit() {
       console.log(err);
     }
   };
+
+  function deleteModel(theIndex) {
+    setSkillsArray((prev) => prev.filter((item, index) => index !== theIndex));
+  }
+
+  function deleteMe(theIndex) {
+    setExperienceArr(experienceArr.filter((item, index) => index !== theIndex));
+  }
+
+  function addSkill() {
+    setSkillsArray((prev) => [...prev, ""]);
+  }
+
+  function editSkill(skillIndex, e) {
+    const newArr = [...skillsArray];
+    newArr[skillIndex] = e.target.value;
+    setSkillsArray(newArr);
+  }
+
+  function addExperience() {
+    setExperienceArr((prev) => [...prev, ""]);
+  }
+
+  function editExperience(expIndex, e) {
+    const newArr = [...experienceArr];
+    newArr[expIndex] = e.target.value;
+    setExperienceArr(newArr);
+  }
 
   return (
     <div>
@@ -142,11 +162,13 @@ function Edit() {
               className="input-field textarea-field"
               placeholder="summary"
               defaultValue={cvToEdit.summary}
+              ref={summaryTextAreaRef}
             />
             <textarea
               className="input-field textarea-field"
               placeholder="education"
               defaultValue={cvToEdit.summary}
+              ref={educationTextAreaRef}
             />
             <input
               className="input-field"
@@ -208,9 +230,15 @@ function Edit() {
             <button className="add-btn" type="button" onClick={addExperience}>
               add another experience
             </button>
-            {<Upload setImageURL={setImageURL} />}
-            <img className="uploaded-image" src={imageURL} alt="" />
-            <button type="submit">Save Info</button>
+
+            <div className="upload-container">
+              <Upload setImageURL={setImageURL} imageURL={imageURL} />
+              <img src={imageURL} alt="profile-img" />
+            </div>
+
+            <button className="submit-btn" type="submit">
+              Save
+            </button>
           </div>
         </form>
       </div>

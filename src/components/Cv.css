@@ -96,7 +96,6 @@
 
   .textarea-field{
     width: 100%;
-    height: 0;
     resize: vertical;
     min-height: 40px;
     border: 1px solid #ccc;
