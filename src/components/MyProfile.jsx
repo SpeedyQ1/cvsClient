@@ -8,7 +8,7 @@ import html2canvas from "html2canvas";
 
 function MyProfile() {
   const [cvArr, setCvArr] = useState([]);
-  const [loading, setLoading] = useState(true); // Initialize loading state as true
+  const [loading, setLoading] = useState(true); 
 
   let token = JSON.parse(localStorage.getItem("token")).token;
   let FirstTemplateArr = [];
@@ -54,7 +54,7 @@ function MyProfile() {
 
   return (
     <div id="myProfile-container">
-      {loading ? ( // Conditional rendering based on loading state
+      {loading ? ( 
         <div className="loader">
           <svg className="pl" width="240" height="240" viewBox="0 0 240 240">
             <circle

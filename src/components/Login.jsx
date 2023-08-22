@@ -1,42 +1,35 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"
+import "./Login.css";
 
 function Login() {
-
   const navigate = useNavigate();
 
-  
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-       const token = await axios.post(
-        "https://speedyqcvs.onrender.com/users",
-        {email: email, password: password}
-      );
-      localStorage.setItem('token', JSON.stringify(token.data));
-      navigate("/myprofile")
-      window.location.reload()
-
+      const token = await axios.post("https://speedyqcvs.onrender.com/users", {
+        email: email,
+        password: password,
+      });
+      localStorage.setItem("token", JSON.stringify(token.data));
+      navigate("/myprofile");
+      window.location.reload();
     } catch (err) {
-      if(err.response || err.response.status == 401){
-        alert("incorrect usernamr or password")
+      if (err.response || err.response.status == 401) {
+        alert("incorrect username or password");
       }
       console.log(err);
     }
-  
 
-    setEmail("")
-    setPassword("")
-  }
+    setEmail("");
+    setPassword("");
+  };
 
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div id="login-container">
@@ -63,16 +56,13 @@ function Login() {
         </form>
         <p id="registration-link">
           Don't have an account?{" "}
-          <Link  to="/register">
+          <Link to="/register">
             <u>Register Here</u>
           </Link>
         </p>
       </div>
     </div>
   );
-  
-  
 }
 
-export default Login
-
+export default Login;
